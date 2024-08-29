@@ -1,1 +1,1 @@
-module LearnGo
+module com.github.rakhmedovrs.investment-calculator
