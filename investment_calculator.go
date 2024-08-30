@@ -20,7 +20,7 @@ func getUserInput(requestedInput string) float64 {
 	return userInput
 }
 
-func main() {
+func investmentCalculator() {
 	var investmentAmount float64
 	var expectedReturnRate float64
 	var years float64
