@@ -13,16 +13,21 @@ func calculateFutureValue(investmentAmount, expectedReturnRate, years float64) (
 	return futureValue, futureRealValue
 }
 
+func getUserInput(requestedInput string) float64 {
+	var userInput float64
+	fmt.Printf("Enter %s: \n", requestedInput)
+	fmt.Scan(&userInput)
+	return userInput
+}
+
 func main() {
 	var investmentAmount float64
 	var expectedReturnRate float64
 	var years float64
-	fmt.Println("Enter investment amount: ")
-	fmt.Scan(&investmentAmount)
-	fmt.Println("Enter rate of return: ")
-	fmt.Scan(&expectedReturnRate)
-	fmt.Println("Enter length of years: ")
-	fmt.Scan(&years)
+
+	investmentAmount = getUserInput("investment amount")
+	expectedReturnRate = getUserInput("rate of return")
+	years = getUserInput("investment length of years")
 
 	futureValue, futureRealValue := calculateFutureValue(investmentAmount, expectedReturnRate, years)
 	fmt.Printf("Future value: %.2f\n", futureValue)
