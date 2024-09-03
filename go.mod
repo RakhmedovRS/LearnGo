@@ -1,1 +1,1 @@
-module com.github.rakhmedovrs.investment-calculator
+module com.github.rakhmedovrs/udemy-go-course
