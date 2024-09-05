@@ -2,31 +2,30 @@ package main
 
 import (
 	"bufio"
-	"com.github.rakhmedovrs/udemy-go-course/note"
+	"com.github.rakhmedovrs/udemy-go-course/todo"
 	"fmt"
 	"os"
 	"strings"
 )
 
-func notesApp() {
-	userNote := *getNote()
-	err := outputData(userNote)
+func todoApp() {
+	userTodo := *getTodo()
+	err := outputData(userTodo)
 	if err != nil {
 		return
 	}
 }
 
-func getNote() *note.Note {
-	title := getUserInputs("Note title: ")
-	content := getUserInputs("Note content: ")
-	userNote, err := note.New(title, content)
+func getTodo() *todo.Todo {
+	content := getUserTodoInputs("Todo content: ")
+	userTodo, err := todo.New(content)
 	if err != nil {
 		panic(err)
 	}
-	return userNote
+	return userTodo
 }
 
-func getUserInputs(prompt string) string {
+func getUserTodoInputs(prompt string) string {
 	fmt.Println(prompt)
 	value, err := bufio.NewReader(os.Stdin).ReadString('\n')
 	if err != nil {
