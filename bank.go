@@ -1,40 +1,21 @@
 package main
 
 import (
+	"com.github.rakhmedovrs/udemy-go-course/fileops"
 	"errors"
 	"fmt"
-	"os"
-	"strconv"
 )
 
 const balanceFileName = "balance.txt"
 const defaultBalance = 1000
 
-func persistBalanceIntoFile(balance float64) {
-	_ = os.WriteFile(balanceFileName, []byte(fmt.Sprintf("%f", balance)), 0644)
-}
-
-func readBalanceFromFile() (float64, error) {
-	bytes, err := os.ReadFile(balanceFileName)
-	if err != nil {
-		return defaultBalance, errors.New("unable to find balance file")
-	}
-	balanceText := string(bytes)
-	balance, err := strconv.ParseFloat(balanceText, 64)
-	if err != nil {
-		return defaultBalance, errors.New("unable to parse balance file")
-	}
-	return balance, nil
-}
-
 func bank() {
 	fmt.Println("Welcome to Go Bank!")
 mainLoop:
 	for {
-		var balance, err = readBalanceFromFile()
+		var balance, err = fileops.ReadFloatFromFile(balanceFileName, defaultBalance)
 		if err != nil {
 			fmt.Println(err)
-			panic(err)
 		}
 
 		fmt.Println("What do you want to do?")
@@ -58,7 +39,7 @@ mainLoop:
 				continue mainLoop
 			}
 			balance += depositAmount
-			persistBalanceIntoFile(balance)
+			fileops.PersistFloatIntoFile(balance, balanceFileName)
 			fmt.Printf("Your new balance: %f\n", balance)
 		case 3:
 			fmt.Printf("How much do you want to withdraw?\n")
@@ -69,7 +50,7 @@ mainLoop:
 				continue mainLoop
 			}
 			balance -= withdrawAmount
-			persistBalanceIntoFile(balance)
+			fileops.PersistFloatIntoFile(balance, balanceFileName)
 			fmt.Printf("Your new balance: %f\n", balance)
 		case 4:
 			fmt.Println("Goodbye!")
